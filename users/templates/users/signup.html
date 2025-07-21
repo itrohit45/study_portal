@@ -1,0 +1,100 @@
+{% extends 'home/navbar.html' %} 
+
+{% block body %} 
+
+{% load static %}
+
+<style>
+  body {
+    background: linear-gradient(to right, #74ebd5, #9face6);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .container-box {
+    max-width: 400px;
+    margin: 80px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    border: 2px solid #28a745;
+  }
+
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 40px;
+  }
+
+  .form-label {
+    font-weight: bold;
+    color: #555;
+  }
+
+  .btn-primary {
+    width: 100%;
+    background-color: #4A00E0;
+    border: none;
+    transition: 0.3s;
+  }
+
+  .btn-primary:hover {
+    background-color: #8E2DE2;
+  }
+
+  #message-popup {
+    margin-top: 20px;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+
+<div>
+  <center>
+    <h1>SignUp</h1>
+
+    {% if messages %}
+    <div id="message-popup">
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="container-box">
+      <form method="post" action="/signup">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label class="form-label">Username</label>
+          <input type="text" class="form-control" id="username" name="username" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" name="email" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" name="password" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Signup</button>
+      </form><br>
+      <a href="/"> Do you already have an account? Log in here.</a>
+    </div>
+  </center>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(() => {
+      const popup = document.getElementById('message-popup');
+      if (popup) {
+        popup.style.display = 'none';
+      }
+    }, 5000);
+  });
+</script>
+
+{% endblock %}

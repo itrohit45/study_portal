@@ -1,0 +1,161 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studant Study Portal</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <style>
+    /* Resetting body styles */
+    body {
+      font-family: "Roboto", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+  
+    /* Styles for navigation bar */
+    .navigationWrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0px;
+      background-color: #222;
+      box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.25);
+      color: white;
+      text-transform: uppercase;
+      overflow: hidden;
+    }
+  
+    .logoWrapper {
+      display: flex;
+      margin-left: 10px;
+    }
+  
+    .stylish {
+      font-weight: bold;
+    }
+  
+    .logo {
+      padding-left: 4px;
+      color: #ea4f4c;
+    }
+  
+    .navigation {
+      display: flex;
+      list-style-type: none;
+    }
+  
+    .parent {
+      position: relative;
+      padding: 0 10px;
+      cursor: pointer;
+    }
+  
+    .link {
+      display: block;
+      padding: 10px 6px;
+      text-decoration: none;
+      color: white;
+      transition: all 0.3s ease-in-out;
+    }
+  
+    .link:hover {
+      color: #ea4f4c;
+    }
+  
+    .fa-minus,
+    .fa-plus {
+      margin-right: 5px;
+      font-size: 12px;
+      transition: all 0.3s ease-in-out;
+    }
+  
+    .subnavigation {
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 0;
+      display: none;
+      width: 200px;
+      padding: 10px;
+      background-color: #222;
+      box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.25);
+    }
+  
+    .subnavigation li {
+      list-style-type: none;
+      margin-bottom: 5px;
+    }
+  
+    .subnavigation li a {
+      display: block;
+      padding: 5px 0;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease-in-out;
+    }
+  
+    .subnavigation li a:hover {
+      color: #ea4f4c;
+    }
+  
+    /* Active styles */
+    .active.parent .subnavigation {
+      display: block;
+    }
+  </style>
+  
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" class="navbar bg-primary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">STUDENT STUDY PORTAL</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+          <a href="/portal/contact" class="nav-link active" aria-current="page">Contact Us</a>
+         </li>
+         {% if request.session.username %}
+         <li class="nav-item">
+          <a href="/portal/home" class="nav-link active" aria-current="page">Home</a>
+         </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{request.session.username}}
+            </a>
+            <ul class="dropdown-menu">
+              
+              <li><a class="dropdown-item" href="/profile">My Profile</a></li>
+              <li><a class="dropdown-item" href="/logout">Logout</a></li>
+              
+            </ul>
+          </li>
+          
+          
+        </ul>
+        
+          {% else %}
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">Signup</a>
+          </li>
+        </ul>
+        {% endif %}  
+
+      </div>
+    </div>
+  </nav>
+{% block body %}{% endblock %}
+</body>
+{% block content %}{% endblock %}
+</html>
+

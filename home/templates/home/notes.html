@@ -1,0 +1,185 @@
+{% extends 'home/navbar.html' %} 
+
+{% block body %} 
+
+{% load static %}
+
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #83a4d4, #b6fbff);
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 16px;
+    background-color: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    color: #444;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: 0.3s border-color ease;
+  }
+
+  .form-control:focus {
+    border-color: #4a90e2;
+    outline: none;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 17px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .btn-outline-info {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    transition: 0.3s background-color ease;
+  }
+
+  .btn-outline-info:hover {
+    background-color: #2c73d2;
+  }
+
+  legend {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .container1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .box {
+    width: 280px;
+    min-height: 200px;
+    background: linear-gradient(145deg, #ffffff, #ffffff);
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    text-decoration: none;
+    color: #000;
+  }
+
+  .box:hover {
+    transform: scale(1.03);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .box-content {
+    padding: 20px;
+  }
+
+  .box-content h2 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #2c3e50;
+  }
+
+  .box-content p {
+    font-size: 1rem;
+    color: #555;
+  }
+
+  .box-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .delete-btn {
+    margin-top: 15px;
+    display: inline-block;
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    border: none;
+    transition: 0.3s ease;
+  }
+
+  .delete-btn:hover {
+    background-color: #c0392b;
+  }
+
+  @media (max-width: 768px) {
+    .box {
+      width: 90%;
+    }
+
+    .container {
+      padding: 20px;
+      margin: 30px auto;
+    }
+  }
+</style>
+
+<div class="container1">
+  {% for note in notes %}
+    <a href="{% url 'notedetail' pk=note.pk %}" class="box-link">
+      <div class="box">
+        <div class="box-content">
+          <h2>{{ note.title }}</h2>
+          <p>{{ note.description|truncatewords:15 }}</p>
+          <a href="{% url 'notedelete' pk=note.pk %}" class="delete-btn">Delete</a> 
+        </div>
+      </div>
+    </a>
+  {% endfor %}
+</div>
+
+<div class="container">
+  <fieldset class="form-group">
+    <legend>Create New Note</legend>
+  </fieldset>
+  <form method="POST" action="">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" rows="4" class="form-control" required></textarea>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-outline-info" type="submit" id="createNoteBtn">
+        Create
+      </button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

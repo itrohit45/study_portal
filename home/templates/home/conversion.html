@@ -1,0 +1,198 @@
+{% extends 'home/navbar.html' %} 
+
+{% block body %} 
+
+{% load static %} 
+
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #74ebd5, #9face6);
+    margin: 0;
+    padding: 0;
+    color: #343a40;
+  }
+
+  .main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 0;
+    min-height: 100vh;
+  }
+
+  .container {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    max-width: 700px;
+    width: 100%;
+  }
+
+  legend {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #4A00E0;
+    margin-bottom: 20px;
+  }
+
+  .form-check-label {
+    font-weight: 500;
+    margin-right: 15px;
+  }
+
+  .form-check-input {
+    margin-right: 5px;
+    cursor: pointer;
+  }
+
+  input[type="text"],
+  select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+  }
+
+  input[type="text"]:focus,
+  select:focus {
+    border-color: #4A00E0;
+    outline: none;
+  }
+
+  .btn-outline-info {
+    background-color: #4A00E0;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-outline-info:hover {
+    background-color: #8E2DE2;
+  }
+
+  .answer {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #28a745;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .form-group label {
+    font-weight: bold;
+    color: #444;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .col-md-4 {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  @media (max-width: 768px) {
+    .row {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<br>
+<div class="main">
+  <div class="container text-center">
+    <form method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <legend>Select Measurement Type</legend>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="measurement" id="mass" value="mass">
+          <label class="form-check-label" for="mass">Mass</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="measurement" id="length" value="length">
+          <label class="form-check-label" for="length">Length</label>
+        </div>
+        <br><br>
+        <button class="btn btn-outline-info" type="submit">Select</button>
+      </div>
+
+      {% if input %}
+      <fieldset class="form-group">
+        <legend>Enter Conversion Details</legend>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="input">Value</label>
+            <input type="text" name="input" id="input" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label for="measure1">From</label>
+            <select name="measure1" id="measure1" class="form-control">
+              {% if measurement == 'length' %}
+              <option value="yard">Yard</option>
+              <option value="foot">Foot</option>
+              {% elif measurement == 'mass' %}
+              <option value="pound">Pound</option>
+              <option value="kilogram">Kilogram</option>
+              {% endif %}
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="measure2">To</label>
+            <select name="measure2" id="measure2" class="form-control">
+              {% if measurement == 'length' %}
+              <option value="yard">Yard</option>
+              <option value="foot">Foot</option>
+              {% elif measurement == 'mass' %}
+              <option value="pound">Pound</option>
+              <option value="kilogram">Kilogram</option>
+              {% endif %}
+            </select>
+          </div>
+        </div>
+      </fieldset>
+      {% endif %}
+
+      {% if answer %}
+      <p class="answer">{{ answer }}</p>
+      {% endif %}
+
+      <br>
+      <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Convert</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Store selected radio for persistence (optional)
+  const selectedMeasurement = localStorage.getItem('selectedMeasurement');
+  if (selectedMeasurement) {
+    const radioBtn = document.querySelector(`input[name="measurement"][value="${selectedMeasurement}"]`);
+    if (radioBtn) {
+      radioBtn.checked = true;
+    }
+  }
+
+  document.querySelectorAll('input[name="measurement"]').forEach((radioBtn) => {
+    radioBtn.addEventListener('change', () => {
+      localStorage.setItem('selectedMeasurement', radioBtn.value);
+    });
+  });
+</script>
+
+{% endblock %}

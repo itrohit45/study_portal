@@ -1,0 +1,62 @@
+{% extends 'home/navbar.html' %} 
+
+{% block body %} 
+
+{% load static %}
+
+<style>
+  body {
+    background: linear-gradient(to right, #74ebd5, #9face6);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .container {
+    max-width: 400px;
+    margin-top: 100px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+  }
+
+  .form-label {
+    font-weight: bold;
+    color: #555;
+  }
+
+  .btn-primary {
+    width: 100%;
+    background-color: #4A00E0;
+    border: none;
+    transition: 0.3s;
+  }
+
+  .btn-primary:hover {
+    background-color: #8E2DE2;
+  }
+</style>
+
+<div class="container">
+  <h2>Login</h2>
+  <form method="post" action="/">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Username</label>
+      <input type="text" class="form-control" name="username" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      <input type="password" class="form-control" name="password" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form><br>
+  <a href="/signup">  Don't Have an Account? Please Sign Up</a>
+</div>
+
+{% endblock %}

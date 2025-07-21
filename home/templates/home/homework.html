@@ -1,0 +1,218 @@
+{% extends 'home/navbar.html' %} 
+
+{% block body %} 
+
+{% load static %} 
+
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #74ebd5, #9face6);
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  h4 {
+    text-align: center;
+    color: #555;
+    margin-bottom: 20px;
+  }
+
+  table.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  .table th,
+  .table td {
+    padding: 14px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+  }
+
+  .table th {
+    background-color: #4A00E0;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .table tbody tr:hover {
+    background-color: #f0f8ff;
+  }
+
+  .form-check-label {
+    font-weight: 500;
+    color: #333;
+  }
+
+  .form-check-input {
+    margin-right: 8px;
+    cursor: default;
+  }
+
+  .btn-outline-danger,
+  .btn-outline-info {
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    transition: 0.3s ease;
+  }
+
+  .btn-outline-danger {
+    background-color: #dc3545;
+    color: #fff;
+  }
+
+  .btn-outline-danger:hover {
+    background-color: #c82333;
+  }
+
+  .btn-outline-info {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .btn-outline-info:hover {
+    background-color: #0056b3;
+  }
+
+  fieldset {
+    border: none;
+    margin-bottom: 20px;
+  }
+
+  legend {
+    font-size: 1.6em;
+    color: #4A00E0;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 8px;
+    color: #444;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+
+  .form-control:focus {
+    border-color: #4A00E0;
+    outline: none;
+  }
+
+  textarea.form-control {
+    resize: vertical;
+    height: 100px;
+  }
+
+  @media (max-width: 768px) {
+    .table th, .table td {
+      font-size: 14px;
+    }
+  }
+</style>
+
+<div class="container">
+  {% if homeworks %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Subject</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Due</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for homework in homeworks %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ homework.subject }}</td>
+        <td>{{ homework.title }}</td>
+        <td>{{ homework.description }}</td>
+        <td>{{ homework.due }}</td>
+        <td>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="homework{{ homework.pk }}" {% if homework.is_finished %} checked {% endif %} disabled>
+            <label class="form-check-label" for="homework{{ homework.pk }}">
+              {% if homework.is_finished %}
+              Completed
+              {% else %}
+              Pending
+              {% endif %}
+            </label>
+          </div>
+        </td>
+        <td>
+          <form method="POST" action="{% url 'delete_homework' homework.pk %}">
+            {% csrf_token %}
+            <button class="btn btn-outline-danger" type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <h4>No homeworks found! Create some.</h4>
+  {% endif %}
+</div>
+
+<div class="container">
+  <form method="POST" action="{% url 'homework' %}">
+    {% csrf_token %}
+    <fieldset>
+      <legend>Add Homework</legend>
+      <div class="form-group">
+        <label for="subject">Subject:</label>
+        <input type="text" name="subject" id="subject" class="form-control" placeholder="Enter subject" required>
+      </div>
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title" class="form-control" placeholder="Enter title" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea name="description" id="description" class="form-control" placeholder="Enter description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="due">Due:</label>
+        <input type="date" name="due" id="due" class="form-control" required>
+      </div>
+    </fieldset>
+    <div class="form-group" style="text-align: right;">
+      <button class="btn btn-outline-info" type="submit">Create</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

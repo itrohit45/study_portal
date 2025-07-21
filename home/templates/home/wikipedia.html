@@ -1,0 +1,134 @@
+{% extends 'home/navbar.html' %} 
+
+{% block body %} 
+
+{% load static %} 
+
+<style>
+  body {
+    background: linear-gradient(to right, #74ebd5, #9face6);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .search-section {
+    background: white;
+    text-align: center;
+    margin: 60px auto;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 700px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
+  }
+
+  .search-section h2 {
+    font-size: 28px;
+    color: #4A00E0;
+    margin-bottom: 10px;
+  }
+
+  .search-section p, b {
+    font-size: 16px;
+    color: #555;
+  }
+
+  .search-input {
+    width: 80%;
+    padding: 12px;
+    margin: 20px 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+
+  .search-btn {
+    padding: 10px 24px;
+    background-color: #4A00E0;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .search-btn:hover {
+    background-color: #8E2DE2;
+  }
+
+  .content-section {
+    margin-top: 40px;
+    text-align: left;
+  }
+
+  .custom-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-bottom: 10px;
+  }
+
+  .custom-header h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+  }
+
+  .custom-header h6 {
+    margin: 0;
+    font-size: 14px;
+    color: #0066cc;
+    word-break: break-all;
+  }
+
+  .description {
+    margin: 20px 0;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    color: #444;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  hr {
+    margin: 15px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+  }
+</style>
+
+<section class='search-section'>
+  <h2>Search articles in Wikipedia</h2>
+  <p>Enter the search query to obtain the results</p>
+  <b>Enter without any space</b>
+
+  <div>
+    <form action="" method="post">
+      {% csrf_token %}
+      <input class="search-input" type="text" name="search_query" placeholder="Enter search query">
+      <input class="search-btn" type="submit" value="Submit">
+    </form>
+  </div>
+
+  {% if title %}
+  <div class="container">
+    <div class="content-section">
+      <a href="{{ link }}" target="_blank" style="text-decoration: none;">
+        <div class="custom-header">
+          <h2>{{ title }}</h2>
+          <h6>{{ link }}</h6>
+        </div>
+      </a>
+      <hr>
+      <p class="description">
+        {{ details }}
+      </p>
+      <hr>
+    </div>
+  </div>
+  {% endif %}
+</section>
+
+{% endblock %}

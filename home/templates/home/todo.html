@@ -1,0 +1,170 @@
+{% extends 'home/navbar.html' %} 
+
+{% block body %} 
+
+<title>Todo List</title>
+
+<style>
+  body {
+    background: linear-gradient(to right, #74ebd5, #9face6);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .main {
+    padding: 40px 0;
+  }
+
+  .container {
+    max-width: 850px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  h4 {
+    text-align: center;
+    color: #444;
+    margin-top: 30px;
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+
+  .table th,
+  .table td {
+    padding: 14px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+  }
+
+  .table th {
+    background-color: #4A00E0;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .table tbody tr:hover {
+    background-color: #f8f9fa;
+  }
+
+  .form-check-label {
+    font-weight: 500;
+    color: #333;
+  }
+
+  .form-check-input {
+    cursor: pointer;
+    margin-right: 8px;
+  }
+
+  .btn-outline-info,
+  .btn-outline-danger {
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: 0.3s ease;
+    border: none;
+  }
+
+  .btn-outline-info {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .btn-outline-info:hover {
+    background-color: #0056b3;
+  }
+
+  .btn-outline-danger {
+    background-color: #dc3545;
+    color: #fff;
+  }
+
+  .btn-outline-danger:hover {
+    background-color: #c82333;
+  }
+
+  legend {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4A00E0;
+    margin-bottom: 15px;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-top: 5px;
+    box-sizing: border-box;
+  }
+
+  .form-group {
+    text-align: right;
+  }
+
+</style>
+
+<div class="main">
+  <div class="container">
+    {% if not todos_done %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for todo in todos %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ todo.title }}</td>
+          <td>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="todo_{{ todo.pk }}" {% if todo.is_finished %} checked {% endif %}>
+              <label class="form-check-label" for="todo_{{ todo.pk }}">
+                Mark as Completed
+              </label>
+            </div>
+          </td>
+          <td>
+            <form method="POST" action="{% url 'delete-todo' todo.pk %}">
+              {% csrf_token %}
+              <button class="btn btn-outline-danger" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <h4>All tasks have been done! Create to add more.</h4>
+    {% endif %}
+  </div>
+
+  <div class="container">
+    <form method="POST" action="{% url 'create-todo' %}">
+      {% csrf_token %}
+      <fieldset>
+        <legend>Create Todo</legend>
+        <input type="text" name="title" placeholder="Enter title" required>
+      </fieldset><br>
+      <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Create</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

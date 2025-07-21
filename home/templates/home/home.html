@@ -1,0 +1,152 @@
+
+{% extends 'home/navbar.html' %} 
+
+{% block body %} 
+{% load static %}
+
+
+<style>
+    
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+}
+
+.page-title {
+    text-align: center;
+    padding: 40px 0 30px 0;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #0057b8;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+  }
+
+.container-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+  background-color: #f2f2f2;
+  gap: 20px;
+}
+
+.container-box {
+  flex: 0 0 30%;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none; /* Remove underline for links */
+  color: inherit; /* Inherit text color */
+}
+
+.container-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  border-color: #3399ff;
+}
+
+.container-box a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #ccc;
+}
+
+.description {
+  padding: 15px;
+  flex-grow: 1;
+}
+
+.description h2 {
+  margin: 0 0 10px 0;
+  font-size: 24px;
+  color: #0077cc;
+}
+
+.description p {
+  margin: 0;
+  font-size: 16px;
+  color: #555;
+}
+
+</style>
+
+ <h1 class="page-title">Studant Study Portal</h1>
+
+<div class="container-wrapper">
+  <div class="container-box">
+    <a href="{% url 'search_books' %}">
+            <img src="{% static 'images/bookss.jpeg' %}" alt="image" class="image">
+            <div class="description">
+                <h2>Books</h2>
+                <p>Browse books from a list of neatly organised book menu</p>
+            </div>
+        </a>
+  </div>
+  <div class="container-box">
+    <a href="{% url 'notes' %}">
+            <img src="{% static 'images/no.jpg' %}" alt="image" class="image">
+            <div class="description">
+                <h2>Notes</h2>
+                <p>Create Notes to refer them later. They are stored permanently until deleted</p>
+            </div>
+        </a>
+  </div>
+  <div class="container-box">
+    <a href="{% url 'homework' %}">
+            <img src="{% static 'images/homework.jpg' %}" alt="image" class="image">
+            <div class="description">
+                <h2>Homework</h2>
+                <p>Add homeworks and assign them deadlines. They will be displayed prioritised by deadlines</p>
+            </div>
+        </a>
+  </div>
+  <div class="container-box">
+    <a href="{% url 'conversion' %}">
+            <img src="{% static 'images/conversion.jpg' %}" alt="image" class="image">
+            <div class="description">
+                <h2>Conversion</h2>
+                <p>Check out the conversion table, that hepls you to convert measurements to more familiar ones of your choice</p>
+            </div>
+        </a>
+  </div>
+  <div class="container-box">
+    <a href="{% url 'todo' %}">
+            <img src="{% static 'images/list.png' %}" alt="image" class="image">
+            <div class="description">
+                <h2>Todo</h2>
+                <p>Add your To-Do lists for your day and remove them as you finish</p>
+            </div>
+        </a>
+  </div>
+  <div class="container-box">
+    <a href="{% url 'wikipedia' %}">
+            <img src="{% static 'images/wikipedia.jpeg' %}" alt="image" class="image">
+            <div class="description">
+                <h2>Wikipedia</h2>
+                <p>Homework and Assignments? Search wikipedia to get fast results</p>
+            </div>
+        </a>
+  </div>
+</div>
+<br><br><br>
+
+{% endblock %}  

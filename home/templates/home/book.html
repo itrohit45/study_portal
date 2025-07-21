@@ -1,0 +1,132 @@
+{% extends 'home/navbar.html' %}
+
+{% block body %}
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+         background: linear-gradient(to right, #83a4d4, #b6fbff);
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 800px;
+        margin: 40px auto;
+        background: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .title {
+        text-align: center;
+        color: #333;
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+    }
+
+    .search-form {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+
+    .search-form input[type="text"] {
+        padding: 10px;
+        width: 60%;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+    }
+
+    .search-form button {
+        padding: 10px 20px;
+        background-color: #0066cc;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .search-form button:hover {
+        background-color: #004c99;
+    }
+
+    .results-title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: #222;
+    }
+
+    .book-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .book-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #f9f9f9;
+        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .book-card img {
+        max-width: 80px;
+        border-radius: 6px;
+    }
+
+    .book-info h3 {
+        margin: 0 0 8px;
+        color: #333;
+    }
+
+    .book-info p {
+        margin: 2px 0;
+        font-size: 0.95rem;
+        color: #555;
+    }
+</style>
+
+<div class="container">
+    <h1 class="title">📚 Book Search</h1>
+
+    <form method="POST" class="search-form">
+        {% csrf_token %}
+        <input type="text" name="query" placeholder="Search for books..." required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if books %}
+        <h2 class="results-title">Search Results:</h2>
+        <ul class="book-list">
+            {% for book in books %}
+                <li class="book-card">
+                    <div class="book-info">
+                        <h3>
+                          <a href="{{ book.volumeInfo.infoLink }}" target="_blank">
+                            {{ book.volumeInfo.title }}
+                          </a>
+                        </h3>
+                        {% if book.volumeInfo.authors %}
+                            <p><strong>Author:</strong> {{ book.volumeInfo.authors|join:", " }}</p>
+                        {% endif %}
+                        {% if book.volumeInfo.publisher %}
+                            <p><strong>Publisher:</strong> {{ book.volumeInfo.publisher }}</p>
+                        {% endif %}
+                    </div>
+                    {% if book.volumeInfo.imageLinks %}
+                        <img src="{{ book.volumeInfo.imageLinks.thumbnail }}" alt="No image">
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+{% endblock %}
