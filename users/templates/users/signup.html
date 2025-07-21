@@ -8,22 +8,26 @@
   body {
     background: linear-gradient(to right, #74ebd5, #9face6);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
   }
 
   .container-box {
     max-width: 400px;
-    margin: 80px auto;
+    margin: 80px auto 40px auto;
     background: white;
-    padding: 30px;
+    padding: 30px 25px;
     border-radius: 12px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
     border: 2px solid #28a745;
+    box-sizing: border-box;
   }
 
   h1 {
     text-align: center;
     color: #333;
     margin-top: 40px;
+    font-size: 2rem;
   }
 
   .form-label {
@@ -36,6 +40,11 @@
     background-color: #4A00E0;
     border: none;
     transition: 0.3s;
+    padding: 12px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
   }
 
   .btn-primary:hover {
@@ -44,9 +53,28 @@
 
   #message-popup {
     margin-top: 20px;
-    width: 400px;
+    max-width: 400px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .container-box {
+      margin: 40px 15px 30px 15px;
+      padding: 25px 15px;
+      max-width: 90%;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin-top: 30px;
+    }
+
+    .btn-primary {
+      font-size: 1rem;
+      padding: 10px;
+    }
   }
 </style>
 

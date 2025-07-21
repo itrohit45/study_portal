@@ -8,37 +8,96 @@
   body {
     background: linear-gradient(to right, #74ebd5, #9face6);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
   }
 
   .container {
     max-width: 400px;
-    margin-top: 100px;
+    margin: 80px auto 40px auto;
     background: white;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+    box-sizing: border-box;
   }
 
   h2 {
     text-align: center;
     margin-bottom: 25px;
     color: #333;
+    font-size: 2rem;
   }
 
   .form-label {
     font-weight: bold;
     color: #555;
+    display: block;
+    margin-bottom: 8px;
   }
 
-  .btn-primary {
+  input.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    margin-bottom: 18px;
+    transition: border-color 0.3s ease;
+  }
+
+  input.form-control:focus {
+    border-color: #4A00E0;
+    outline: none;
+    box-shadow: 0 0 5px rgba(74, 0, 224, 0.5);
+  }
+
+  button.btn-primary {
     width: 100%;
     background-color: #4A00E0;
+    color: white;
     border: none;
-    transition: 0.3s;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
   }
 
-  .btn-primary:hover {
+  button.btn-primary:hover {
     background-color: #8E2DE2;
+  }
+
+  a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #4A00E0;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .container {
+      margin: 40px 15px;
+      padding: 25px 15px;
+      max-width: 100%;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+    }
+
+    button.btn-primary {
+      font-size: 1rem;
+      padding: 10px 0;
+    }
   }
 </style>
 
