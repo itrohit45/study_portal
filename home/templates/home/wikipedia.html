@@ -3,21 +3,23 @@
 {% block body %} 
 
 {% load static %} 
-
 <style>
   body {
     background: linear-gradient(to right, #74ebd5, #9face6);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
   }
 
   .search-section {
     background: white;
     text-align: center;
     margin: 60px auto;
-    padding: 30px;
+    padding: 30px 40px;
     border-radius: 12px;
     max-width: 700px;
     box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
+    box-sizing: border-box;
   }
 
   .search-section h2 {
@@ -26,19 +28,27 @@
     margin-bottom: 10px;
   }
 
-  .search-section p, b {
+  .search-section p,
+  .search-section b {
     font-size: 16px;
     color: #555;
   }
 
   .search-input {
     width: 80%;
+    max-width: 500px;
     padding: 12px;
     margin: 20px 0 10px;
     border: 1px solid #ccc;
     border-radius: 6px;
     box-sizing: border-box;
     font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+
+  .search-input:focus {
+    border-color: #4A00E0;
+    outline: none;
   }
 
   .search-btn {
@@ -49,7 +59,8 @@
     border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
-    transition: 0.3s;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
   }
 
   .search-btn:hover {
@@ -59,6 +70,9 @@
   .content-section {
     margin-top: 40px;
     text-align: left;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .custom-header {
@@ -67,6 +81,8 @@
     align-items: flex-start;
     gap: 4px;
     margin-bottom: 10px;
+    word-wrap: break-word;
+    word-break: break-word;
   }
 
   .custom-header h2 {
@@ -90,12 +106,66 @@
     color: #444;
     line-height: 1.6;
     font-size: 16px;
+    white-space: pre-line; /* preserve new lines if any */
   }
 
   hr {
     margin: 15px 0;
     border: none;
     border-top: 1px solid #ddd;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .search-section {
+      width: 90%;
+      padding: 20px;
+      margin: 40px auto;
+    }
+
+    .search-input {
+      width: 100%;
+      margin-bottom: 15px;
+      margin-left: 0;
+    }
+
+    .search-btn {
+      width: 100%;
+      margin-left: 0;
+    }
+
+    .content-section {
+      padding: 0 10px;
+    }
+
+    .custom-header h2 {
+      font-size: 20px;
+    }
+
+    .description {
+      font-size: 14px;
+      padding: 15px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .search-section h2 {
+      font-size: 22px;
+    }
+
+    .search-section p,
+    .search-section b {
+      font-size: 14px;
+    }
+
+    .custom-header h2 {
+      font-size: 18px;
+    }
+
+    .description {
+      font-size: 13px;
+      padding: 12px;
+    }
   }
 </style>
 

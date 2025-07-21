@@ -5,6 +5,8 @@
     body {
         background-color: #f2f4f8;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
     }
 
     .contact-container {
@@ -42,6 +44,34 @@
 
     .contact-links a:hover {
         background-color: #004c99;
+    }
+
+    /* ✅ Responsive CSS below */
+    @media screen and (max-width: 768px) {
+        .contact-container {
+            margin: 30px 15px;
+            padding: 20px;
+        }
+
+        .contact-title {
+            font-size: 1.5rem;
+        }
+
+        .contact-links a {
+            font-size: 0.95rem;
+            padding: 10px;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .contact-title {
+            font-size: 1.3rem;
+        }
+
+        .contact-links a {
+            font-size: 0.9rem;
+            padding: 9px;
+        }
     }
 </style>
 

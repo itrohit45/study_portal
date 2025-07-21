@@ -17,7 +17,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 60px 0;
+    padding: 60px 20px;
     min-height: 100vh;
   }
 
@@ -104,12 +104,41 @@
     min-width: 200px;
   }
 
+  /* ✅ Responsive Enhancements */
   @media (max-width: 768px) {
+    .main {
+      padding: 30px 10px;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    legend {
+      font-size: 1.3em;
+      text-align: center;
+    }
+
+    .btn-outline-info {
+      width: 100%;
+    }
+
+    .form-check {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
     .row {
       flex-direction: column;
     }
+
+    .col-md-4 {
+      width: 100%;
+    }
   }
 </style>
+
 
 <br>
 <div class="main">

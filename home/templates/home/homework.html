@@ -20,6 +20,7 @@
     background-color: #fff;
     border-radius: 16px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
   }
 
   h4 {
@@ -32,6 +33,7 @@
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    min-width: 800px;
   }
 
   .table th,
@@ -131,9 +133,44 @@
     height: 100px;
   }
 
+  /* ✅ Responsive Media Queries */
   @media (max-width: 768px) {
-    .table th, .table td {
+    .container {
+      padding: 20px;
+      margin: 20px 10px;
+    }
+
+    .table th,
+    .table td {
+      font-size: 13px;
+      padding: 10px;
+    }
+
+    legend {
+      font-size: 1.4em;
+    }
+
+    .btn-outline-info,
+    .btn-outline-danger {
       font-size: 14px;
+      padding: 6px 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .table {
+      font-size: 12px;
+    }
+
+    .form-control {
+      font-size: 14px;
+      padding: 10px;
+    }
+
+    .btn-outline-info,
+    .btn-outline-danger {
+      font-size: 13px;
+      padding: 5px 10px;
     }
   }
 </style>

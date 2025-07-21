@@ -3,7 +3,6 @@
 {% block body %} 
 
 {% load static %}
-
 <style>
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -12,9 +11,74 @@
     padding: 0;
   }
 
+  .container1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .box-link {
+    text-decoration: none;
+    color: inherit;
+    width: 280px;
+  }
+
+  .box {
+    min-height: 200px;
+    background: linear-gradient(145deg, #ffffff, #ffffff);
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+  }
+
+  .box:hover {
+    transform: scale(1.03);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .box-content h2 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    word-break: break-word;
+  }
+
+  .box-content p {
+    font-size: 1rem;
+    color: #555;
+    flex-grow: 1;
+    word-break: break-word;
+  }
+
+  .delete-btn {
+    margin-top: 15px;
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: flex-start;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .delete-btn:hover {
+    background-color: #c0392b;
+  }
+
   .container {
     max-width: 800px;
-    margin: 50px auto;
+    margin: 50px auto 80px auto;
     padding: 30px;
     border-radius: 16px;
     background-color: #ffffff;
@@ -39,6 +103,7 @@
     border-radius: 8px;
     border: 1px solid #ccc;
     transition: 0.3s border-color ease;
+    resize: vertical;
   }
 
   .form-control:focus {
@@ -52,16 +117,13 @@
     font-size: 17px;
     border-radius: 8px;
     cursor: pointer;
-  }
-
-  .btn-outline-info {
     background-color: #4a90e2;
     color: white;
     border: none;
     transition: 0.3s background-color ease;
   }
 
-  .btn-outline-info:hover {
+  .btn:hover {
     background-color: #2c73d2;
   }
 
@@ -73,75 +135,20 @@
     margin-bottom: 20px;
   }
 
-  .container1 {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-    gap: 20px;
+  /* Responsive styles */
+  @media (max-width: 992px) {
+    .box-link {
+      width: 45%;
+    }
   }
 
-  .box {
-    width: 280px;
-    min-height: 200px;
-    background: linear-gradient(145deg, #ffffff, #ffffff);
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
-    text-decoration: none;
-    color: #000;
-  }
-
-  .box:hover {
-    transform: scale(1.03);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-  }
-
-  .box-content {
-    padding: 20px;
-  }
-
-  .box-content h2 {
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-    color: #2c3e50;
-  }
-
-  .box-content p {
-    font-size: 1rem;
-    color: #555;
-  }
-
-  .box-link {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .delete-btn {
-    margin-top: 15px;
-    display: inline-block;
-    background-color: #e74c3c;
-    color: #fff;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 14px;
-    border: none;
-    transition: 0.3s ease;
-  }
-
-  .delete-btn:hover {
-    background-color: #c0392b;
-  }
-
-  @media (max-width: 768px) {
-    .box {
+  @media (max-width: 600px) {
+    .box-link {
       width: 90%;
     }
-
     .container {
+      margin: 30px auto 60px auto;
       padding: 20px;
-      margin: 30px auto;
     }
   }
 </style>

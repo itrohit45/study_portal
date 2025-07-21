@@ -27,6 +27,7 @@
     font-weight: 600;
     color: #2c3e50;
     margin-bottom: 20px;
+    word-break: break-word;
   }
 
   .box-hr {
@@ -46,20 +47,42 @@
     background-color: #f8f8f8;
     box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
     min-height: 180px;
+    text-align: justify;
+    word-wrap: break-word;
   }
 
+  /* 👇 Mobile Responsive */
   @media (max-width: 768px) {
     .box-container {
-      width: 90%;
-      padding: 30px 20px;
+      width: 92%;
+      padding: 24px 16px;
+      margin: 60px auto 20px auto;
     }
 
     .box-heading {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
     }
 
     .box-paragraph {
       font-size: 1rem;
+      line-height: 1.6;
+      padding: 16px;
+      min-height: auto;
+    }
+
+    .box-hr {
+      width: 80%;
+    }
+  }
+
+  /* 👇 Extra Small Devices */
+  @media (max-width: 480px) {
+    .box-heading {
+      font-size: 1.3rem;
+    }
+
+    .box-paragraph {
+      font-size: 0.95rem;
     }
   }
 </style>
